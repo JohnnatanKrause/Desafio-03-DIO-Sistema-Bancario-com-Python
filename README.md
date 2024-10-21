@@ -11,3 +11,7 @@ Com os novos conhecimentos adquiridos sobre Programação orientada a objetos (P
 **1º Parte:** xxxxxxxx.
 
 **2º Parte:** xxxxxxxx.
+
+O Desafia deve seguir a base do UML a baixo:
+
+![Trilha Python - desafio](https://github.com/user-attachments/assets/19b2edd5-8a16-4a1d-899b-b4c2c5859ef1)
