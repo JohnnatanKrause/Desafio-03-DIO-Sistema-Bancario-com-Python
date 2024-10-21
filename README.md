@@ -10,20 +10,13 @@ O objetivo geral é iniciar a modelagem do sistema bancário em POO.
 
 **O desafio foi dividido em 2 partes:** 
 
-*1º Parte:* Adicionar classes  para clientes.
+*1º Parte:* Adicionar classes  para clientes e para as operações bancárias: depósito e saque.
 
-*2º Parte:* Adicionar classes  para as operações bancárias: depósito e saque.
+*2º Parte ou desafio extra:* Após concluir  a modelagem das classes e a criação dos métodos. Atualizar os métodos  que tratam as opções de menu, para funcionarem com as classes modeladas.
 
 Logo o sistema deve ser capaz de armazenar os dados de clientes e contas bancárias em objetos oa invés de dicionários.
 
 O Desafia deve seguir o modelo de classes UML a baixo:
 
 ![Trilha Python - desafio](https://github.com/user-attachments/assets/19b2edd5-8a16-4a1d-899b-b4c2c5859ef1)
-
-
-# **DESAFIO EXTRA**
-
-Após concluir  a modelagem das classes e a criação dos métodos. Atualizar os métodos  que tratam as opções de menu, para funcionarem com as classes modeladas.
-
-
 
