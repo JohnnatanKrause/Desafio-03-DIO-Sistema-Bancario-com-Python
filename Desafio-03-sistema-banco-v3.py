@@ -61,15 +61,12 @@ class Conta:
 
         if excedeu_saldo:
             print("\n@@@ Operação falhou! Você não tem saldo suficiente. @@@")
-
         elif valor > 0:
             self._saldo -= valor
             print("\n=== Saque realizado com sucesso! ===")
             return True
-
         else:
             print("\n@@@ Operação falhou! O valor informado é inválido. @@@")
-
         return False
 
     def depositar(self, valor):
@@ -79,7 +76,6 @@ class Conta:
         else:
             print("\n@@@ Operação falhou! O valor informado é inválido. @@@")
             return False
-
         return True
 
 
@@ -99,10 +95,8 @@ class ContaCorrente(Conta):
 
         if excedeu_limite:
             print("\n@@@ Operação falhou! O valor do saque excede o limite. @@@")
-
         elif excedeu_saques:
             print("\n@@@ Operação falhou! Número máximo de saques excedido. @@@")
-
         else:
             return super().sacar(valor)
 
@@ -129,7 +123,7 @@ class Historico:
             {
                 "tipo": transacao.__class__.__name__,
                 "valor": transacao.valor,
-                "data": datetime.now().strftime("%d-%m-%Y %H:%M:%s"),
+                "data": datetime.now().strftime("%d-%m-%Y %H:%M:%S"),
             }
         )
 
@@ -199,8 +193,7 @@ def recuperar_conta_cliente(cliente):
         print("\n@@@ Operação falhou! Cliente não possui conta! @@@")
         return
 
-    # FIXME: não permite cliente escolher a conta
-    return cliente.contas[0]
+    return cliente.contas[0]  # Aqui pode ser melhorado para permitir escolha
 
 
 def depositar(clientes):
@@ -265,7 +258,6 @@ def exibir_extrato(clientes):
     print(f"\nSaldo:\n\tR$ {conta.saldo:.2f}")
     print("==========================================")
 
-
 def criar_cliente(clientes):
     cpf = input("Informe o CPF (somente número): ")
     cliente = filtrar_cliente(cpf, clientes)
@@ -285,7 +277,7 @@ def criar_cliente(clientes):
     print("\n=== Cliente criado com sucesso! ===")
 
 
-def criar_conta(numero_conta, clientes, contas):
+def criar_conta(clientes, contas):
     cpf = input("Informe o CPF do cliente: ")
     cliente = filtrar_cliente(cpf, clientes)
 
@@ -293,6 +285,7 @@ def criar_conta(numero_conta, clientes, contas):
         print("\n@@@ Operação falhou! Cliente não encontrado, fluxo de criação de conta encerrado! @@@")
         return
 
+    numero_conta = len(contas) + 1
     conta = ContaCorrente.nova_conta(cliente=cliente, numero=numero_conta)
     contas.append(conta)
     cliente.contas.append(conta)
@@ -311,32 +304,38 @@ def main():
     contas = []
 
     while True:
-        opcao = menu()
+        try:
+            opcao = menu()
 
-        if opcao == "1":
-            depositar(clientes)
+            if opcao == "1":
+                depositar(clientes)
 
-        elif opcao == "2":
-            sacar(clientes)
+            elif opcao == "2":
+                sacar(clientes)
 
-        elif opcao == "3":
-            exibir_extrato(clientes)
+            elif opcao == "3":
+                exibir_extrato(clientes)
 
-        elif opcao == "4":
-            criar_cliente(clientes)
+            elif opcao == "4":
+                criar_conta(clientes, contas)
 
-        elif opcao == "5":
-            numero_conta = len(contas) + 1
-            criar_conta(numero_conta, clientes, contas)
+            elif opcao == "5":
+                listar_contas(contas)
 
-        elif opcao == "6":
-            listar_contas(contas)
+            elif opcao == "6":
+                criar_cliente(clientes)
 
-        elif opcao == "7":
-            break
+            elif opcao == "7":
+                print("Encerrando o programa...")
+                break
 
-        else:
-            print("\n@@@ Operação falhou! Operação inválida, por favor selecione novamente a operação desejada. @@@")
+            else:
+                print("Opção inválida! Tente novamente.")
+
+        except Exception as e:
+            print(f"Ocorreu um erro: {e}")
+            input("Pressione Enter para continuar...")
 
 
-main()
+if __name__ == "__main__":
+    main()
